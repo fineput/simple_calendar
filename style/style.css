@@ -16,7 +16,7 @@ body {
 
 .calendar {
     width: 502px;
-    min-height: 497px;
+    min-height: 570px;
     background: white;
     border-radius: 16px;
     box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.2);
@@ -82,6 +82,12 @@ body {
     width: max-content;
 }
 
+.day_list div:hover {
+    background: #c8c8c8;
+    color: black;
+    cursor: pointer;
+}
+
 .today {
     width: 64px;
     height: 64px;
@@ -107,7 +113,7 @@ body {
     border-top: 1px solid #DFDFDF;
 }
 
-.one_day_not_this_mounth {
+.one_day_prev_month, .one_day_next_month{
     width: 64px;
     height: 64px;
     display: flex;
