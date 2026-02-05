@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: #414E55;
+}
+
+.calendar {
+    width: 502px;
+    height: 497px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.2);
+    padding: 30px;
+}
+
+.calendar_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.calendar_nav h3 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.nav_arrow {
+    display: flex;
+    gap: 40px;
+}
+
+.week_list {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.name_day_of_week {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.day_list {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-right: 1px solid #DFDFDF;
+    border-bottom: 1px solid #DFDFDF;
+    width: max-content;
+}
+
+.one_day {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    border-left: 1px solid #DFDFDF;
+    border-top: 1px solid #DFDFDF;
+}
+

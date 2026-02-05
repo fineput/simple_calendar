@@ -1,0 +1,19 @@
+button,
+input[type="button"],
+input[type="reset"] {
+  background: transparent; /* Removes default background color */
+  border: none;            /* Removes default border */
+  padding: 0;              /* Removes default padding */
+  margin: 0;               /* Ensures no default margin */
+  font: inherit;           /* Inherits font styles from parent */
+  color: inherit;          /* Inherits text color from parent */
+  cursor: pointer;         /* Ensures the pointer cursor remains */
+  /* Normalize line-height for Firefox */
+  line-height: normal;
+  /* Corrects font smoothing for Webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  /* Corrects inability to style clickable input types in iOS */
+  -webkit-appearance: none;
+  appearance: none;
+}
