@@ -66,68 +66,84 @@ function renderCalendar() {
     totalCells < 35 ? renderNextMonth(remainingSmall) :renderNextMonth(remainingBig);
 
     elDayCalendar.innerHTML = calendarHtml; 
+
+    displayNote();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('addNoteBtn');
+
+    if(btn) {
+        btn.addEventListener('click', addNotes);
+    } else {
+        console.error("Кнопку 'addNoteBtn' не знайдено в HTML!")
+    }
+
+    renderCalendar();
+})
 
 elDayCalendar.addEventListener('click', (e) => {
     const target = e.target;
-    if(!target.classList.contains('day_list')){
-        const day = target.textContent.trim();
-        const offset = parseInt(target.dataset.m);
+    if(!target.dataset.m) return;
 
-        let targetMonthInx = (data.getMonth() + offset + 12) % 12;
-        notes_day.textContent = `Note ${months[targetMonthInx]} ${day}`
+    const day = Number(target.textContent.trim());
+    const offset = Number(target.dataset.m);
+
+    (data.getMonth() + offset + 12) % 12;
+    data.setDate(day)
+
+    renderCalendar()
+    displayNote();
     
-        displayNote();
-    }
 })
 
 document.querySelector('.week_list').innerHTML = 
     ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map(d => `<div class="name_day_of_week">${d}</div>`).join('');
 
 
-const changeMonth = val => {
-    data.setMonth(data.getMonth() + val);
-    renderCalendar()
-};
-
-prev_btn.onclick = () => changeMonth(-1);
-next_btn.onclick = () => changeMonth(1);
 
 function getSelectedDataKey() {
-    const titleParst = notes_day.textContent.split(' ');
-    const day = titleParst[titleParst.length - 1];
-    const monthName = titleParst[titleParst.length - 2];
+    const text = notes_day.textContent.trim();
+    if(!text) return null;
+
+    const parts = text.split(' ').filter(part => part.length > 0);
+    const day = parts[parts.length - 1];
+    const monthName = parts[parts.length - 2];
     const monthIndex = months.indexOf(monthName);
-    const year =  data.getFullYear();
+    const year = data.getFullYear();
 
-    return `${year}-${monthIndex + 1}-${day}`
+    if (!day || monthIndex === -1) {
+        console.error("Не вдалося розпізнати дату з тексту:", text);
+        return null;
+    } 
+    return `${year}-${monthIndex + 1}-${day}`;
 }
-
-btn.addEventListener('click', () => {
-    addNotes();
-})
 
 function addNotes() {
     const input = document.getElementById('inputText');
-    const noteText = input.value.trim();
     const dataKey = getSelectedDataKey();
+    const noteText = input.value.trim();
 
-    if(noteText) {
+    if(noteText && dataKey) {
         const allNotes = JSON.parse(localStorage.getItem('calendarNotes') || '{}');
         
         if(!allNotes[dataKey]) allNotes[dataKey] = [];
 
         allNotes[dataKey].push(noteText);
         localStorage.setItem('calendarNotes', JSON.stringify(allNotes));
-
+        
         input.value = '';
         displayNote();
+    } else {
+        console.warn("Нотатка порожня або ключ дати не знайдено");
     }
 }
 
 function displayNote() {
     const list = document.getElementById('notesList');
     const dataKey = getSelectedDataKey();
+    if (!list || !dataKey) return;
+
     const allNotes = JSON.parse(localStorage.getItem('calendarNotes') || '{}');
 
     const dayNotes = allNotes[dataKey] || [];
@@ -143,15 +159,26 @@ function displayNote() {
     ).join('');
 }
 
-function deleteNote(index) {
+window.deleteNote = function(index) {
     const dataKey = getSelectedDataKey();
     const allNotes = JSON.parse(localStorage.getItem('calendarNotes') || '{}');
 
     if(allNotes[dataKey]){
         allNotes[dataKey].splice(index, 1);
-        localStorage.setItem('calendarNotes', JSON.stringify(notes));
+        localStorage.setItem('calendarNotes', JSON.stringify(allNotes));
         displayNote();
     }
 }
 
+
+const changeMonth = val => {
+    data.setMonth(data.getMonth() + val);
+    renderCalendar()
+};
+
+prev_btn.onclick = () => {data.setMonth(data.getMonth() - 1); renderCalendar()};
+next_btn.onclick = () => {data.setMonth(data.getMonth() + 1); renderCalendar()};
+
+
 renderCalendar();
+displayNote();
