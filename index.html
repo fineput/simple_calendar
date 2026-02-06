@@ -11,26 +11,38 @@
     <title>Calendar</title>
 </head>
 <body>
-    <div class="calendar">
-        <div class="calendar_nav">
-            <h3 class="month_and_year">May 2023</h3>
-            <div class="nav_arrow">
-                <button class="prev_btn">
-                    <svg class="prev_svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>                </button>
-                <button class="next_btn">
-                    <svg class="next_svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
-                </button>
+    <div class="wrapper">
+        <div class="calendar">
+            <div class="calendar_nav">
+                <h3 class="month_and_year">May 2023</h3>
+                <div class="nav_arrow">
+                    <button class="prev_btn">
+                        <svg class="prev_svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>                </button>
+                    <button class="next_btn">
+                        <svg class="next_svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="calendar_main">
+                <div class="week_list">
+                </div>
+                <div class="day_list">
+                </div>
             </div>
         </div>
 
-        <div class="calendar_main">
-            <div class="week_list">
+
+        <div class="notes">
+            <div class="notes_nav">
+                <h3 class="notes_day">Note January 1</h3>
             </div>
-            <div class="day_list">
-            </div>
+            <textarea id="inputText" placeholder="Enter text..."></textarea>
+            <button class="addNote" id="addNoteBtn">Add note</button>
+            <div id="notesList"></div>
         </div>
-        <div class="message">Щось</div>
     </div>
+   
     <script src="main.js"></script>
 </body>
 </html>

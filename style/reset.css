@@ -17,3 +17,15 @@ input[type="reset"] {
   -webkit-appearance: none;
   appearance: none;
 }
+
+
+textarea {
+  border: none;
+  background-color: transparent;
+  outline: none; /* Removes the focus glow/outline */
+  resize: none;
+  padding: 0;
+  margin: 0;
+  /* Ensure box model is consistent */
+  box-sizing: border-box; 
+}
